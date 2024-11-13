@@ -1,0 +1,83 @@
+/* Header 스타일 */
+.header {
+  display: flex;
+  justify-content: flex-start; /* 헤더 내부 요소들을 왼쪽으로 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  padding: 30px 20px; /* 패딩을 조정하여 왼쪽 여백을 줌 */
+  background-color: #141414;
+  color: white;
+  position: fixed; /* 헤더를 고정하여 스크롤 시에도 상단에 유지 */
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+}
+
+.header.scrolled {
+  background-color: rgba(20, 20, 20, 0.8); /* 스크롤 시 투명한 배경 */
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px; /* 링크 간격을 더 넓게 */
+  
+  /* 동적으로 폰트 크기 조절 (최소값, 뷰포트 비율, 최대값) */
+  font-size: clamp(14px, 2vw, 18px); 
+}
+
+.header a:hover {
+  color: #f39c12; /* 링크 호버 시 색상 변경 */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* 링크 간격 일정하게 유지 */
+}
+
+.auth-button {
+  background-color: transparent;
+  border: none;
+  
+  /* 동적으로 폰트 크기 조절 (최소값, 뷰포트 비율, 최대값) */
+  font-size: clamp(14px, 2vw, 18px); 
+   
+  color: white;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  color: #f39c12; /* 로그인/로그아웃 버튼 호버 시 색상 변경 */
+}
+
+.username {
+   margin-right:15px;
+
+   /* 동적으로 폰트 크기 조절 (최소값, 뷰포트 비율, 최대값) */
+   font-size: clamp(14px,2vw ,18 px)
+}
+
+
+/* 사용자 아이콘 크기 조정 */
+.user-icon {
+  font-size: 24px; 
+}
+
+/* 애니메이션 효과 */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+   animation: fadeInDown .5s ease-in-out; /* 페이지 로드 시 애니메이션 */
+}

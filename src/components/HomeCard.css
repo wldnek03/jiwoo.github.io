@@ -1,0 +1,38 @@
+/* HomeCard 스타일 */
+.home-card-item{
+  position: relative;
+  flex: 0 0 calc(20% - 10px); /* 한 줄에 다섯 개씩 보이도록 설정 */
+  margin-right: 10px;
+  overflow: hidden; /* 부모 요소에서 넘치는 부분 숨김 */
+  background-color: #141414;
+}
+
+/* 포스터 이미지 스타일 */
+.poster-container img {
+  width: 100%; /* 부모 요소의 너비에 맞게 이미지 크기 조정 */
+  height: 85%; /* 부모 요소의 높이에 맞게 이미지 크기 조정 (85%로 설정) */
+  object-fit: cover; /* 이미지 비율을 유지하면서 부모 크기에 맞게 자름 */
+}
+
+.home-card-item:hover {
+  transform: scale(1.05); /* 마우스를 올렸을 때 확대 */
+  cursor: pointer; /* 커서를 손 모양으로 변경 */
+}
+/* 좋아요 아이콘 (❤️) */
+.like-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: red;
+}
+
+/* 영화 제목 스타일 */
+.movie-title-item {
+  margin-top: 5px;
+  text-align: center;
+  color: white;
+  font-size: clamp(0.85rem, 2vw, 1.5rem);
+}
+
+

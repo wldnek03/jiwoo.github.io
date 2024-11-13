@@ -1,0 +1,120 @@
+/* SearchMovies.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #333;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* 헤더 높이만큼 상단 여백 추가 */
+.filters {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px; /* 헤더 높이만큼 여백 추가 */
+  margin-bottom: 20px;
+}
+
+.filters input,
+.filters select,
+.filters button {
+  margin-right: 10px;
+  padding: 10px;
+}
+
+/* 반응형 디자인 - 작은 화면에서 검색 필드와 버튼 크기 조정 */
+@media (max-width: 600px) {
+    .filters input,
+    .filters select,
+    .filters button {
+        width: calc(100% - 20px); /* 작은 화면에서는 입력 필드와 버튼을 전체 너비로 설정 */
+        padding: 8px; /* 패딩을 줄여서 컴팩트하게 */
+        font-size: 0.9rem; /* 폰트 크기를 줄여서 더 작게 표시 */
+    }
+}
+
+/* 중간 화면에서 검색 필드와 버튼 크기 조정 */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .filters input,
+    .filters select,
+    .filters button {
+        width: calc(50% - 20px); /* 중간 화면에서는 입력 필드와 버튼을 절반 너비로 설정 */
+        padding: 10px; /* 패딩을 기본값으로 유지 */
+        font-size: 1rem; /* 폰트 크기를 기본값으로 유지 */
+    }
+}
+
+/* 큰 화면에서 검색 필드와 버튼 크기 조정 */
+@media (min-width: 1025px) {
+    .filters input,
+    .filters select,
+    .filters button {
+        width: auto; /* 큰 화면에서는 기본 너비로 설정 */
+        padding: 12px; /* 패딩을 조금 더 크게 설정 */
+        font-size: 1.1rem; /* 폰트 크기를 조금 더 크게 설정 */
+    }
+}
+
+.movie-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0 auto; /* Center the movie list */
+  padding: 20px; /* Add padding around the list */
+}
+
+.movie-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  width: calc(20% - 20px); /* 기본적으로 한 줄에 다섯 개의 영화가 나오도록 설정 */
+  margin: 10px; /* 각 항목 사이에 여백 추가 */
+}
+
+.movie-item img {
+  width: 100%;
+  height: auto;
+  max-width: 100%; /* 이미지가 항목 너비를 넘지 않도록 설정 */
+  transition: transform 0.3s ease-in-out; /* 부드러운 확대 애니메이션 */
+}
+
+.movie-item:hover img {
+  transform: scale(1.1); /* 마우스 오버 시 이미지 확대 */
+}
+
+.movie-item p {
+  margin-top: 5px;
+}
+
+.load-more {
+  display: block;
+  margin: auto;
+  padding: 10px;
+}
+
+/* 반응형 디자인 */
+
+/* 작은 화면 (모바일) - 한 줄에 세 개의 영화 */
+@media (max-width: 600px) {
+    .movie-item {
+        width: calc(33.33% - 20px); /* 한 줄에 세 개의 영화 */
+    }
+}
+
+/* 중간 화면 (태블릿) - 한 줄에 두 개의 영화 */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .movie-item {
+        width: calc(24% - 20 px); 
+    }
+}
+
+
+
+/* 큰 화면 (데스크탑) - 한 줄에 네 개의 영화 */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .movie-item {
+        width: calc(20% - 20px); /* 한 줄에 네 개의 영화 */
+    }
+}

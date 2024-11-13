@@ -1,0 +1,83 @@
+/* 전체 컨테이너 */
+.movie-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+    padding-top: 100px; /* 헤더 공간을 주기 위해 패딩 추가 */
+}
+
+/* 영화 상세 정보 레이아웃 */
+.movie-detail {
+    display: flex;
+    max-width: 900px;
+    background-color: rgba(114, 112, 112, 0.799);
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+/* 포스터 이미지 */
+.movie-poster {
+    width: 300px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/* 영화 정보 섹션 */
+.movie-info {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.movie-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.movie-release-date,
+.movie-rating {
+    font-size: 1.2rem;
+}
+
+.movie-overview {
+    margin-top: 20px;
+}
+
+/* 트레일러 컨테이너 */
+.trailer-container {
+    margin-top: 20px;
+}
+
+.trailer-container h2 {
+    margin-bottom: 10px;
+}
+
+/* 트레일러 비디오 스타일 */
+.trailer-container iframe,
+.trailer-container video {
+    width: 100%; /* 부모 요소의 너비에 맞게 확장 */
+    height: auto; /* 높이를 자동으로 조정 */
+    aspect-ratio: 16 / 9; /* 트레일러의 가로 세로 비율을 고정 (16:9) */
+    border-radius: 10px; /* 비디오 모서리 둥글게 */
+}
+
+/* Back 버튼 컨테이너 */
+.back-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Back 버튼 스타일 */
+.back-button {
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #b30000;
+}

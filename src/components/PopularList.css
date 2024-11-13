@@ -1,0 +1,47 @@
+/* 헤더 높이만큼의 상단 여백 추가 */
+.main-content {
+  margin-top: 120px; /* 헤더 높이만큼 마진 추가 (기존보다 더 여유롭게) */
+}
+
+/* View-toggle 스타일 */
+.view-toggle {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  margin-top: 50px; /* 상단 여백 */
+  margin-bottom: 20px;
+}
+
+.view-toggle button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 60px; /* 헤더 아래로 충분한 공간 확보 */
+  margin-bottom: 20px; 
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.view-toggle button.active {
+  background-color: #535bf2;
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #ef1616;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.scroll-to-top:hover {
+  background-color: #d41414; /* Hover 시 색상 변화 */
+}
+.no-scroll {
+  overflow: hidden;
+}
