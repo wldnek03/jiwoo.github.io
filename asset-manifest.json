@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/jiwoo/static/css/main.c8ce09f9.css",
+    "main.js": "/jiwoo/static/js/main.61f636c8.js",
+    "index.html": "/jiwoo/index.html",
+    "main.c8ce09f9.css.map": "/jiwoo/static/css/main.c8ce09f9.css.map",
+    "main.61f636c8.js.map": "/jiwoo/static/js/main.61f636c8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c8ce09f9.css",
+    "static/js/main.61f636c8.js"
+  ]
+}
