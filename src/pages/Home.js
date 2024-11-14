@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate 훅 추가
+import { useNavigate } from 'react-router-dom';
 import { fetchMovies } from '../services/api'; // API 호출 함수
 import HomeCard from '../components/HomeCard'; // 영화 카드 컴포넌트
 import Header from '../components/Header'; // 헤더 컴포넌트
@@ -13,40 +13,66 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
   const [comedyMovies, setComedyMovies] = useState([]);
   const [featuredMovie, setFeaturedMovie] = useState(null); // 추가된 상태
   const [trailerUrl, setTrailerUrl] = useState(''); // 트레일러 URL 상태 추가
+  const [error, setError] = useState(null); // 오류 상태 추가
 
   const navigate = useNavigate(); // 페이지 이동을 위한 훅
 
   // 영화 데이터를 가져오는 함수들
   useEffect(() => {
     if (!apiKey) {
-      console.error("API Key is missing.");
+      setError("로그인 후 영화를 볼 수 있습니다."); // API 키가 없을 때 에러 메시지 설정
       return;
     }
 
     const getPopularMovies = async () => {
-      const data = await fetchMovies('/movie/popular', { api_key: apiKey });
-      setPopularMovies(data.results);
-      setFeaturedMovie(data.results[0]); // 첫 번째 인기 영화를 배너로 설정
+      try {
+        const data = await fetchMovies('/movie/popular', { api_key: apiKey });
+        setPopularMovies(data.results);
+        setFeaturedMovie(data.results[0]); // 첫 번째 인기 영화를 배너로 설정
+      } catch (error) {
+        console.error("Error fetching popular movies:", error);
+        setError("영화를 불러오는 중 오류가 발생했습니다.");
+      }
     };
 
     const getLatestMovies = async () => {
-      const data = await fetchMovies('/movie/upcoming', { api_key: apiKey });
-      setLatestMovies(data.results);
+      try {
+        const data = await fetchMovies('/movie/upcoming', { api_key: apiKey });
+        setLatestMovies(data.results);
+      } catch (error) {
+        console.error("Error fetching latest movies:", error);
+        setError("영화를 불러오는 중 오류가 발생했습니다.");
+      }
     };
 
     const getTopRatedMovies = async () => {
-      const data = await fetchMovies('/movie/top_rated', { api_key: apiKey });
-      setTopRatedMovies(data.results);
+      try {
+        const data = await fetchMovies('/movie/top_rated', { api_key: apiKey });
+        setTopRatedMovies(data.results);
+      } catch (error) {
+        console.error("Error fetching top-rated movies:", error);
+        setError("영화를 불러오는 중 오류가 발생했습니다.");
+      }
     };
 
     const getActionMovies = async () => {
-      const data = await fetchMovies('/discover/movie?with_genres=28', { api_key: apiKey });
-      setActionMovies(data.results);
+      try {
+        const data = await fetchMovies('/discover/movie?with_genres=28', { api_key: apiKey });
+        setActionMovies(data.results);
+      } catch (error) {
+        console.error("Error fetching action movies:", error);
+        setError("영화를 불러오는 중 오류가 발생했습니다.");
+      }
     };
 
     const getComedyMovies = async () => {
-      const data = await fetchMovies('/discover/movie?with_genres=35', { api_key: apiKey });
-      setComedyMovies(data.results);
+      try {
+        const data = await fetchMovies('/discover/movie?with_genres=35', { api_key: apiKey });
+        setComedyMovies(data.results);
+      } catch (error) {
+        console.error("Error fetching comedy movies:", error);
+        setError("영화를 불러오는 중 오류가 발생했습니다.");
+      }
     };
 
     getPopularMovies();
@@ -54,7 +80,7 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
     getTopRatedMovies();
     getActionMovies();
     getComedyMovies();
-  }, [apiKey]); // apiKey가 변경될 때마다 다시 실행되도록 의존성 배열에 추가
+  }, [apiKey]); // apiKey 의존성 추가
 
   // 스크롤 함수들
   const scrollLeft = (id) => {
@@ -119,8 +145,11 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
     <div className="home">
       <Header />
 
+      {/* 에러 메시지 표시 */}
+      {error && <p>{error}</p>}
+
       {/* 배너 섹션 */}
-      {featuredMovie && (
+      {featuredMovie && !error && (
         <div className="banner" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${featuredMovie.backdrop_path})` }}>
           <div className="banner-content">
             <h1>{featuredMovie.title}</h1>
@@ -148,95 +177,99 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
       )}
 
       {/* 인기 영화 섹션 */}
-      <div className="section-title">
-        <h1>인기 영화</h1>
-      </div>
-      <div className="movie-section">
-        <button className="scroll-btn left" onClick={() => scrollLeft('popular')}>◀</button>
-        <div id="popular" className="movie-row">
-          {popularMovies.length > 0 ? (
-            popularMovies.map((movie) => (
-              <HomeCard key={movie.id} movie={movie} />
-            ))
-          ) : (
-            <p>No popular movies to display</p>
-          )}
-        </div>
-        <button className="scroll-btn right" onClick={() => scrollRight('popular')}>▶</button>
-      </div>
+      {!error && (
+        <>
+          <div className="section-title">
+            <h1>인기 영화</h1>
+          </div>
+          <div className="movie-section">
+            <button className="scroll-btn left" onClick={() => scrollLeft('popular')}>◀</button>
+            <div id="popular" className="movie-row">
+              {popularMovies.length > 0 ? (
+                popularMovies.map((movie) => (
+                  <HomeCard key={movie.id} movie={movie} />
+                ))
+              ) : (
+                <p>No popular movies to display</p>
+              )}
+            </div>
+            <button className="scroll-btn right" onClick={() => scrollRight('popular')}>▶</button>
+          </div>
 
-      {/* 최신 영화 섹션 */}
-      <div className="section-title">
-        <h1>최신 영화</h1>
-      </div>
-      <div className="movie-section">
-        <button className="scroll-btn left" onClick={() => scrollLeft('latest')}>◀</button>
-        <div id="latest" className="movie-row">
-          {latestMovies.length > 0 ? (
-            latestMovies.map((movie) => (
-              <HomeCard key={movie.id} movie={movie} />
-            ))
-          ) : (
-            <p>No latest movies to display</p>
-          )}
-        </div>
-        <button className="scroll-btn right" onClick={() => scrollRight('latest')}>▶</button>
-      </div>
+          {/* 최신 영화 섹션 */}
+          <div className="section-title">
+            <h1>최신 영화</h1>
+          </div>
+          <div className="movie-section">
+            <button className="scroll-btn left" onClick={() => scrollLeft('latest')}>◀</button>
+            <div id="latest" className="movie-row">
+              {latestMovies.length > 0 ? (
+                latestMovies.map((movie) => (
+                  <HomeCard key={movie.id} movie={movie} />
+                ))
+              ) : (
+                <p>No latest movies to display</p>
+              )}
+            </div>
+            <button className="scroll-btn right" onClick={() => scrollRight('latest')}>▶</button>
+          </div>
 
-      {/* 최고 평점 영화 섹션 */}
-      <div className="section-title">
-        <h1>최고 평점 영화</h1>
-      </div>
-      <div className="movie-section">
-        <button className="scroll-btn left" onClick={() => scrollLeft('topRated')}>◀</button>
-        <div id="topRated" className="movie-row">
-          {topRatedMovies.length > 0 ? (
-            topRatedMovies.map((movie) => (
-              <HomeCard key={movie.id} movie={movie} />
-            ))
-          ) : (
-            <p>No top-rated movies to display</p>
-          )}
-        </div>
-        <button className="scroll-btn right" onClick={() => scrollRight('topRated')}>▶</button>
-      </div>
+          {/* 최고 평점 영화 섹션 */}
+          <div className="section-title">
+            <h1>최고 평점 영화</h1>
+          </div>
+          <div className="movie-section">
+            <button className="scroll-btn left" onClick={() => scrollLeft('topRated')}>◀</button>
+            <div id="topRated" className="movie-row">
+              {topRatedMovies.length > 0 ? (
+                topRatedMovies.map((movie) => (
+                  <HomeCard key={movie.id} movie={movie} />
+                ))
+              ) : (
+                <p>No top-rated movies to display</p>
+              )}
+            </div>
+            <button className="scroll-btn right" onClick={() => scrollRight('topRated')}>▶</button>
+          </div>
 
-      {/* 액션 영화 섹션 */}
-      <div className="section-title">
-        <h1>액션 영화</h1>
-      </div>
-      <div className="movie-section">
-        <button className="scroll-btn left" onClick={() => scrollLeft('action')}>◀</button>
-        <div id="action" className="movie-row">
-          {actionMovies.length > 0 ? (
-            actionMovies.map((movie) => (
-              <HomeCard key={movie.id} movie={movie} />
-            ))
-          ) : (
-            <p>No action movies to display</p>
-          )}
-        </div>
-        <button className="scroll-btn right" onClick={() => scrollRight('action')}>▶</button>
-      </div>
+          {/* 액션 영화 섹션 */}
+          <div className="section-title">
+            <h1>액션 영화</h1>
+          </div>
+          <div className="movie-section">
+            <button className="scroll-btn left" onClick={() => scrollLeft('action')}>◀</button>
+            <div id="action" className="movie-row">
+              {actionMovies.length > 0 ? (
+                actionMovies.map((movie) => (
+                  <HomeCard key={movie.id} movie={movie} />
+                ))
+              ) : (
+                <p>No action movies to display</p>
+              )}
+            </div>
+            <button className="scroll-btn right" onClick={() => scrollRight('action')}>▶</button>
+          </div>
 
-      {/* 코미디 영화 섹션 */}
-      <div className="section-title">
-        <h1>코미디 영화</h1>
-      </div>
-      <div className="movie-section">
-        <button className="scroll-btn left" onClick={() => scrollLeft('comedy')}>◀</button>
-        <div id="comedy" className="movie-row">
-          {comedyMovies.length > 0 ? (
-            comedyMovies.map((movie) => (
-              <HomeCard key={movie.id} movie={movie} />
-            ))
-          ) : (
-            <p>No comedy movies to display</p>
-          )}
-        </div>
-        <button className="scroll-btn right" onClick={() => scrollRight('comedy')}>▶</button>
-      </div>
-
+          {/* 코미디 영화 섹션 */}
+          <div className="section-title">
+            <h1>코미디 영화</h1>
+          </div>
+          <div className="movie-section">
+            <button className="scroll-btn left" onClick={() => scrollLeft('comedy')}>◀</button>
+            <div id="comedy" className="movie-row">
+              {comedyMovies.length > 0 ? (
+                comedyMovies.map((movie) => (
+                  <HomeCard key={movie.id} movie={movie} />
+                ))
+              ) : (
+                <p>No comedy movies to display</p>
+              )}
+            </div>
+            <button className="scroll-btn right" onClick={() => scrollRight('comedy')}>▶</button>
+          </div>
+        </>
+      )}
+      
     </div>
   );
 };

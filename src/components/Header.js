@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onLogout }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
   const [username, setUsername] = useState(''); // 사용자 이름 (로그인 시 표시)
   const navigate = useNavigate(); // 페이지 이동을 위한 hook
@@ -21,7 +21,16 @@ const Header = () => {
     // 로그아웃 처리
     setIsLoggedIn(false);
     setUsername('');
-    localStorage.removeItem('user'); // 로컬 스토리지에서 사용자 정보 제거
+    
+    // 로컬 스토리지와 세션 스토리지에서 사용자 정보 및 API 키 제거
+    localStorage.removeItem('user'); // 사용자 정보 제거
+    sessionStorage.removeItem('apiKey'); // API 키 제거
+    sessionStorage.removeItem('isLoggedIn'); // 로그인 상태 제거
+
+    if (onLogout) {
+      onLogout(); // 상위 컴포넌트의 로그아웃 함수 호출 (상태 초기화)
+    }
+
     navigate('/'); // 홈으로 리다이렉트
     
     window.location.reload(); // 로그아웃 후 페이지 새로고침하여 상태 반영
