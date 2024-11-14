@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./SearchMovies.css";
 import Header from '../components/Header'; // 헤더 컴포넌트 가져오기
 
-const SearchMovies = () => {
+const SearchMovies = ({ apiKey }) => {  // apiKey를 props로 받음
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState(""); // 검색어 상태
@@ -15,20 +15,33 @@ const SearchMovies = () => {
 
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
-  // 로컬 스토리지에서 사용자 입력 API 키 가져오기
-  const getApiKey = () => {
-    const apiKey = localStorage.getItem('sessionId');
-    if (!apiKey) {
-      throw new Error("API Key is missing. Please log in.");
+  // 로그인 여부 확인 함수 (로컬 스토리지에서 로그인 상태 확인)
+  const getLoginStatusFromLocalStorage = () => {
+    try {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      return isLoggedIn ? JSON.parse(isLoggedIn) : false;
+    } catch (error) {
+      console.error('Error getting login status from localStorage:', error);
+      return false;
     }
-    return apiKey;
   };
 
-  // 영화 데이터를 가져오는 함수
+  // 영화 데이터를 가져오는 함수 (로그인 상태일 때만)
   useEffect(() => {
     const fetchMovies = async () => {
+      if (!getLoginStatusFromLocalStorage()) {
+        console.log("User is not logged in. API call skipped.");
+        setLoading(false);
+        return; // 로그인되지 않은 경우 API 호출 중단
+      }
+
+      if (!apiKey) {
+        console.error("API Key is missing.");
+        return; // API 키가 없으면 더 이상 진행하지 않음
+      }
+
       try {
-        let url = `https://api.themoviedb.org/3/discover/movie?api_key=${getApiKey()}&language=ko-KR&page=${page}&with_genres=${genre}&with_original_language=${language}`;
+        let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=ko-KR&page=${page}&with_genres=${genre}&with_original_language=${language}`;
 
         if (ratingMin) url += `&vote_average.gte=${ratingMin}`;
         if (ratingMax) url += `&vote_average.lte=${ratingMax}`;
@@ -49,7 +62,7 @@ const SearchMovies = () => {
     };
 
     fetchMovies();
-  }, [page, genre, ratingMin, ratingMax, language, sortBy]); // API_KEY 제거
+  }, [page, genre, ratingMin, ratingMax, language, sortBy, apiKey]); // apiKey 의존성 추가
 
   // 필터링 로직 (검색어를 기준으로 필터링)
   const filteredMovies = movies.filter((movie) =>

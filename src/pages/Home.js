@@ -5,16 +5,7 @@ import HomeCard from '../components/HomeCard'; // 영화 카드 컴포넌트
 import Header from '../components/Header'; // 헤더 컴포넌트
 import './Home.css';
 
-// 로컬 스토리지에서 사용자 입력 API 키 가져오기
-const getApiKey = () => {
-  const apiKey = localStorage.getItem('sessionId');
-  if (!apiKey) {
-    throw new Error("API Key is missing. Please log in.");
-  }
-  return apiKey;
-};
-
-const Home = () => {
+const Home = ({ apiKey }) => {  // apiKey를 props로 받음
   const [popularMovies, setPopularMovies] = useState([]);
   const [latestMovies, setLatestMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -23,32 +14,38 @@ const Home = () => {
   const [featuredMovie, setFeaturedMovie] = useState(null); // 추가된 상태
   const [trailerUrl, setTrailerUrl] = useState(''); // 트레일러 URL 상태 추가
 
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const navigate = useNavigate(); // 페이지 이동을 위한 훅
 
+  // 영화 데이터를 가져오는 함수들
   useEffect(() => {
+    if (!apiKey) {
+      console.error("API Key is missing.");
+      return;
+    }
+
     const getPopularMovies = async () => {
-      const data = await fetchMovies('/movie/popular', { api_key: getApiKey() });
+      const data = await fetchMovies('/movie/popular', { api_key: apiKey });
       setPopularMovies(data.results);
       setFeaturedMovie(data.results[0]); // 첫 번째 인기 영화를 배너로 설정
     };
 
     const getLatestMovies = async () => {
-      const data = await fetchMovies('/movie/upcoming', { api_key: getApiKey() });
+      const data = await fetchMovies('/movie/upcoming', { api_key: apiKey });
       setLatestMovies(data.results);
     };
 
     const getTopRatedMovies = async () => {
-      const data = await fetchMovies('/movie/top_rated', { api_key: getApiKey() });
+      const data = await fetchMovies('/movie/top_rated', { api_key: apiKey });
       setTopRatedMovies(data.results);
     };
 
     const getActionMovies = async () => {
-      const data = await fetchMovies('/discover/movie?with_genres=28', { api_key: getApiKey() });
+      const data = await fetchMovies('/discover/movie?with_genres=28', { api_key: apiKey });
       setActionMovies(data.results);
     };
 
     const getComedyMovies = async () => {
-      const data = await fetchMovies('/discover/movie?with_genres=35', { api_key: getApiKey() });
+      const data = await fetchMovies('/discover/movie?with_genres=35', { api_key: apiKey });
       setComedyMovies(data.results);
     };
 
@@ -57,9 +54,9 @@ const Home = () => {
     getTopRatedMovies();
     getActionMovies();
     getComedyMovies();
-  }, []);
+  }, [apiKey]); // apiKey가 변경될 때마다 다시 실행되도록 의존성 배열에 추가
 
-  // 스크롤 함수
+  // 스크롤 함수들
   const scrollLeft = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -77,8 +74,13 @@ const Home = () => {
   // 트레일러 데이터를 가져오는 함수
   const fetchTrailer = async (movieId) => {
     try {
+      if (!apiKey) {
+        console.error("API Key is missing. Cannot fetch trailer.");
+        return;
+      }
+
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${getApiKey()}`
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`
       );
       const data = await response.json();
       

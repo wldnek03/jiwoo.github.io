@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import PopularList from './components/PopularList';
@@ -10,23 +10,31 @@ import ProtectedRoute from './components/ProtectedRoute'; // Import the Protecte
 import MovieDetail from './pages/MovieDetail';
 
 function App() {
-  const handleLoginSuccess = (email) => {
-    console.log(`${email}님 환영합니다!`);
+  const [apiKey, setApiKey] = useState(null); // API 키 상태 관리
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+
+  // 로그인 성공 시 호출되는 함수
+  const handleLoginSuccess = (receivedApiKey) => {
+    setApiKey(receivedApiKey); // 로그인 성공 시 받은 API 키 저장
+    setIsLoggedIn(true); // 로그인 상태로 설정
+    console.log("로그인 성공! API Key:", receivedApiKey);
   };
+
   return (
     <Router>
       <Routes>
         {/* Public routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/search" element={<SearchMovies />} />
-        <Route path="/movie/:id" element={<MovieDetail/>} /> 
+        <Route path="/" element={<Home apiKey={apiKey} />} /> {/* Home에 apiKey 전달 */}
+        <Route path="/search" element={<SearchMovies apiKey={apiKey} />} />
+        <Route path="/movie/:id" element={<MovieDetail />} /> 
         <Route path="/signin" element={<SignIn onLoginSuccess={handleLoginSuccess} />} />
         <Route path="/signup" element={<SignUp />} />
+
         {/* Protected routes */}
         <Route 
           path="/popular" 
           element={
-            <ProtectedRoute>
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
               <PopularList />
             </ProtectedRoute>
           } 
@@ -34,7 +42,7 @@ function App() {
         <Route 
           path="/wishlist" 
           element={
-            <ProtectedRoute>
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Wishlist />
             </ProtectedRoute>
           } 

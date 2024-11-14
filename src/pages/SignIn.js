@@ -51,7 +51,7 @@ const SignIn = ({ onLoginSuccess }) => {
         localStorage.setItem('user', JSON.stringify({ email }));
 
         alert('로그인 성공!');
-        onLoginSuccess(email);
+        onLoginSuccess(apiKey); // 로그인 성공 시 API 키를 상위 컴포넌트로 전달
         navigate('/'); // 메인 페이지로 리다이렉트
       } else {
         alert(`API 응답 오류: ${response.status}`);
