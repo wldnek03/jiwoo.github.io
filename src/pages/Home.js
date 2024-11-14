@@ -5,6 +5,15 @@ import HomeCard from '../components/HomeCard'; // 영화 카드 컴포넌트
 import Header from '../components/Header'; // 헤더 컴포넌트
 import './Home.css';
 
+// 로컬 스토리지에서 사용자 입력 API 키 가져오기
+const getApiKey = () => {
+  const apiKey = localStorage.getItem('sessionId');
+  if (!apiKey) {
+    throw new Error("API Key is missing. Please log in.");
+  }
+  return apiKey;
+};
+
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [latestMovies, setLatestMovies] = useState([]);
@@ -18,28 +27,28 @@ const Home = () => {
 
   useEffect(() => {
     const getPopularMovies = async () => {
-      const data = await fetchMovies('/movie/popular');
+      const data = await fetchMovies('/movie/popular', { api_key: getApiKey() });
       setPopularMovies(data.results);
       setFeaturedMovie(data.results[0]); // 첫 번째 인기 영화를 배너로 설정
     };
 
     const getLatestMovies = async () => {
-      const data = await fetchMovies('/movie/upcoming');
+      const data = await fetchMovies('/movie/upcoming', { api_key: getApiKey() });
       setLatestMovies(data.results);
     };
 
     const getTopRatedMovies = async () => {
-      const data = await fetchMovies('/movie/top_rated');
+      const data = await fetchMovies('/movie/top_rated', { api_key: getApiKey() });
       setTopRatedMovies(data.results);
     };
 
     const getActionMovies = async () => {
-      const data = await fetchMovies('/discover/movie?with_genres=28');
+      const data = await fetchMovies('/discover/movie?with_genres=28', { api_key: getApiKey() });
       setActionMovies(data.results);
     };
 
     const getComedyMovies = async () => {
-      const data = await fetchMovies('/discover/movie?with_genres=35');
+      const data = await fetchMovies('/discover/movie?with_genres=35', { api_key: getApiKey() });
       setComedyMovies(data.results);
     };
 
@@ -69,7 +78,7 @@ const Home = () => {
   const fetchTrailer = async (movieId) => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${process.env.REACT_APP_TMDB_API_KEY}`
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${getApiKey()}`
       );
       const data = await response.json();
       

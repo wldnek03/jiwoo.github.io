@@ -13,14 +13,22 @@ const SearchMovies = () => {
   const [sortBy, setSortBy] = useState(""); // 정렬 필터 상태
   const [page, setPage] = useState(1); // 페이지 상태
 
-  const API_KEY = process.env.REACT_APP_TMDB_API_KEY; // .env 파일에서 API 키 가져오기
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
+
+  // 로컬 스토리지에서 사용자 입력 API 키 가져오기
+  const getApiKey = () => {
+    const apiKey = localStorage.getItem('sessionId');
+    if (!apiKey) {
+      throw new Error("API Key is missing. Please log in.");
+    }
+    return apiKey;
+  };
 
   // 영화 데이터를 가져오는 함수
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=ko-KR&page=${page}&with_genres=${genre}&with_original_language=${language}`;
+        let url = `https://api.themoviedb.org/3/discover/movie?api_key=${getApiKey()}&language=ko-KR&page=${page}&with_genres=${genre}&with_original_language=${language}`;
 
         if (ratingMin) url += `&vote_average.gte=${ratingMin}`;
         if (ratingMax) url += `&vote_average.lte=${ratingMax}`;
@@ -41,7 +49,7 @@ const SearchMovies = () => {
     };
 
     fetchMovies();
-  }, [page, genre, ratingMin, ratingMax, language, sortBy, API_KEY]); // API_KEY 추가
+  }, [page, genre, ratingMin, ratingMax, language, sortBy]); // API_KEY 제거
 
   // 필터링 로직 (검색어를 기준으로 필터링)
   const filteredMovies = movies.filter((movie) =>
