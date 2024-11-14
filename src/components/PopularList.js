@@ -4,10 +4,10 @@ import MovieGrid from './MovieGrid'; // 그리드 뷰 컴포넌트
 import MovieListItem from './MovieListItem'; // 리스트 뷰 컴포넌트
 import './PopularList.css'; // PopularList 스타일
 import endpoints from '../url'; // API 엔드포인트
-import Header from './Header';
+import Header from './Header'; // 헤더 컴포넌트 추가
 import axios from 'axios';
 
-const PopularList = () => {
+const PopularList = ({ apiKey, onLogout }) => {  // apiKey와 onLogout을 props로 받음
     const [movies, setMovies] = useState([]);
     const [currentView, setCurrentView] = useState('grid'); // 초기 뷰는 'grid'
     const [error, setError] = useState(null);
@@ -28,7 +28,13 @@ const PopularList = () => {
     // 영화 데이터를 가져오는 함수 (useCallback으로 메모이제이션)
     const fetchPopularMovies = useCallback(async (page) => {
         try {
-            const response = await axios.get(endpoints.popularMovies(page));
+            if (!apiKey) {
+                throw new Error("API Key is missing.");
+            }
+
+            const response = await axios.get(endpoints.popularMovies(page), {
+                params: { api_key: apiKey }  // apiKey를 요청에 포함
+            });
             const data = response.data;
 
             if (currentView === 'list') {
@@ -38,9 +44,10 @@ const PopularList = () => {
             }
             setTotalPages(data.total_pages);
         } catch (err) {
+            console.error('Error fetching popular movies:', err);
             setError('Failed to fetch popular movies.');
         }
-    }, [currentView]);
+    }, [currentView, apiKey]);  // apiKey 의존성 추가
 
     // 초기 데이터 로드 및 페이지 변경 시 데이터 가져오기
     useEffect(() => {
@@ -113,13 +120,18 @@ const PopularList = () => {
         }
     };
 
-    if (error) {
-        return <div className="error-message">{error}</div>;
-    }
-
     return (
         <div className="popular-container">
-            <Header />
+            
+            {/* 헤더 추가 */}
+            <Header onLogout={onLogout} /> {/* 로그아웃 기능을 위해 onLogout 전달 */}
+
+            {/* 에러 메시지가 있을 때도 헤더를 표시하고 에러를 보여줌 */}
+            {error && (
+                <div className="error-message">
+                    {error}
+                </div>
+            )}
             
             {/* View Toggle Buttons */}
             <div className="view-toggle">

@@ -34,10 +34,10 @@ function App() {
         <Route 
           path="/popular" 
           element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <PopularList />
-            </ProtectedRoute>
-          } 
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                   <PopularList apiKey={apiKey} /> {/* apiKey 전달 */}
+              </ProtectedRoute>
+          }
         />
         <Route 
           path="/wishlist" 
