@@ -6,7 +6,7 @@ import { getLikedMoviesFromLocalStorage } from '../utils/localStorage'; // 유�
 const Wishlist = () => {
   const [wishlistMovies, setWishlistMovies] = useState([]);
 
-  // localStorage에서 좋아요한 영화 목록 불러오기
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 좋아요한 영화 목록을 불러옴
   useEffect(() => {
     const savedLikes = getLikedMoviesFromLocalStorage(); // 유틸리티 함수 사용
     setWishlistMovies(savedLikes); // 저장된 전체 영화를 상태로 설정

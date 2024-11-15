@@ -165,8 +165,8 @@ const PopularList = ({ apiKey, onLogout }) => {  // apiKey와 onLogout을 props�
             ) : (
                 <InfiniteScroll
                     dataLength={movies.length}
-                    next={() => fetchPopularMovies(currentPage + 1)}
-                    hasMore={currentPage < totalPages}
+                    next={() => setCurrentPage((prevPage) => prevPage + 1)}  // 다음 페이지로 이동
+                    hasMore={currentPage < totalPages}  // 더 가져올 데이터가 있는지 확인
                     loader={<h4>Loading...</h4>}
                     endMessage={<p>No more movies!</p>}
                 >

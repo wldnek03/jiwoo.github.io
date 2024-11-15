@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MovieListItem.css'; // 스타일 파일
 import { saveLikedMoviesToLocalStorage, getLikedMoviesFromLocalStorage } from '../utils/localStorage'; // 로컬 스토리지 함수 임포트
 
@@ -9,21 +9,24 @@ const MovieListItem = ({ movie }) => {
     return savedLikes.some(savedMovie => savedMovie.id === movie.id); // 영화 ID로 좋아요 상태 확인
   });
 
+  // 좋아요 상태가 변경될 때마다 로컬 스토리지에 저장
+  useEffect(() => {
+    const savedLikes = getLikedMoviesFromLocalStorage();
+    
+    if (liked) {
+      if (!savedLikes.some(savedMovie => savedMovie.id === movie.id)) {
+        const updatedLikes = [...savedLikes, movie];
+        saveLikedMoviesToLocalStorage(updatedLikes);
+      }
+    } else {
+      const updatedLikes = savedLikes.filter(savedMovie => savedMovie.id !== movie.id);
+      saveLikedMoviesToLocalStorage(updatedLikes);
+    }
+  }, [liked, movie]); // liked 또는 movie가 변경될 때마다 실행
+
   // 포스터 클릭 시 좋아요 상태 업데이트
   const handlePosterClick = () => {
-    const savedLikes = getLikedMoviesFromLocalStorage();
-
-    if (!savedLikes.some(savedMovie => savedMovie.id === movie.id)) {
-      // 좋아요 추가: 영화 전체 데이터를 저장
-      const updatedLikes = [...savedLikes, movie]; // 영화 전체 데이터를 추가
-      saveLikedMoviesToLocalStorage(updatedLikes); // 로컬 스토리지에 저장
-      setLiked(true); // 좋아요 상태 업데이트
-    } else {
-      // 좋아요 취소: 영화 ID로 필터링하여 제거
-      const updatedLikes = savedLikes.filter(savedMovie => savedMovie.id !== movie.id);
-      saveLikedMoviesToLocalStorage(updatedLikes); // 로컬 스토리지에 저장
-      setLiked(false); // 좋아요 상태 업데이트
-    }
+    setLiked((prevLiked) => !prevLiked); // 현재 liked 값을 반전시킴
   };
 
   return (

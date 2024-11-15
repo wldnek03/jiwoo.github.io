@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import './HomeCard.css';
+import React, { useState, useEffect } from 'react';
+import './HomeCard.css'; // CSS 파일 임포트
 import { saveLikedMoviesToLocalStorage, getLikedMoviesFromLocalStorage } from '../utils/localStorage'; // 로컬 스토리지 함수 임포트
 
 const HomeCard = ({ movie }) => {
-  // localStorage에서 좋아요 상태 불러오기 (초기화 함수 사용)
-  const [liked, setLiked] = useState(() => {
-    const savedLikes = getLikedMoviesFromLocalStorage();
-    return savedLikes.some(savedMovie => savedMovie.id === movie.id); // 영화 ID로 좋아요 상태 확인
-  });
+  const [liked, setLiked] = useState(false);
+
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 좋아요 상태를 불러옴
+  useEffect(() => {
+    const savedLikes = getLikedMoviesFromLocalStorage(); // 로컬 스토리지에서 좋아요 목록 불러옴
+    const isLiked = savedLikes.some(savedMovie => savedMovie.id === movie.id); // 영화 ID로 좋아요 여부 확인
+    setLiked(isLiked); // 좋아요 상태 설정
+  }, [movie.id]);
 
   // 포스터 클릭 시 좋아요 상태 업데이트
   const handlePosterClick = () => {
-    const savedLikes = getLikedMoviesFromLocalStorage();
+    const savedLikes = getLikedMoviesFromLocalStorage(); // 현재 저장된 좋아요 목록을 가져옴
 
     if (!savedLikes.some(savedMovie => savedMovie.id === movie.id)) {
       // 좋아요 추가: 영화 전체 데이터를 저장
