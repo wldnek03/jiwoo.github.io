@@ -28,6 +28,13 @@
 .movie-poster {
     width: 100%;
 }
+/* Home.css 파일에 추가 */
+.error-message {
+    margin-top: 100px; /* 헤더 높이에 맞춰서 적절히 조정 */
+    text-align: center;
+    font-size: 1.5rem;
+    color: red;
+  }
 
 /* 스크롤 버튼 스타일 */
 .scroll-btn {

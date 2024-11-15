@@ -5,7 +5,7 @@ import HomeCard from '../components/HomeCard'; // 영화 카드 컴포넌트
 import Header from '../components/Header'; // 헤더 컴포넌트
 import './Home.css';
 
-const Home = ({ apiKey }) => {  // apiKey를 props로 받음
+const Home = ({ apiKey }) => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [latestMovies, setLatestMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -14,7 +14,6 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
   const [featuredMovie, setFeaturedMovie] = useState(null); // 추가된 상태
   const [trailerUrl, setTrailerUrl] = useState(''); // 트레일러 URL 상태 추가
   const [error, setError] = useState(null); // 오류 상태 추가
-
   const navigate = useNavigate(); // 페이지 이동을 위한 훅
 
   // 영화 데이터를 가져오는 함수들
@@ -89,7 +88,7 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
       element.scrollLeft -= 300; // 왼쪽으로 300px 스크롤
     }
   };
-  
+
   const scrollRight = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -104,24 +103,22 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
         console.error("API Key is missing. Cannot fetch trailer.");
         return;
       }
-
       const response = await fetch(
         `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`
       );
       const data = await response.json();
-      
+
       // YouTube에서 제공되는 트레일러만 필터링
       const trailer = data.results.find(
         (video) => video.site === 'YouTube' && video.type === 'Trailer'
       );
-
+      
       if (trailer) {
         setTrailerUrl(`https://www.youtube.com/embed/${trailer.key}`); // YouTube 임베드 URL 설정
       } else {
         alert('해당 영화의 트레일러를 찾을 수 없습니다.');
         setTrailerUrl(''); // 트레일러가 없으면 URL을 빈 값으로 설정
       }
-      
     } catch (error) {
       console.error('트레일러를 가져오는 중 오류가 발생했습니다:', error);
     }
@@ -144,41 +141,35 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
   return (
     <div className="home">
       <Header />
-
+      
       {/* 에러 메시지 표시 */}
-      {error && <p>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
 
-      {/* 배너 섹션 */}
-      {featuredMovie && !error && (
-        <div className="banner" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${featuredMovie.backdrop_path})` }}>
-          <div className="banner-content">
-            <h1>{featuredMovie.title}</h1>
-            <p>{featuredMovie.overview}</p>
-            <div className="banner-buttons">
-              <button className="play-btn" onClick={handlePlayClick}>재생</button>
-              <button className="info-btn" onClick={handleInfoClick}>상세 정보</button> {/* "상세 정보" 버튼 클릭 시 handleInfoClick 호출 */}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 트레일러 섹션 */}
-      {trailerUrl && (
-        <div className="trailer-section">
-          <iframe 
-            width="560" 
-            height="315" 
-            src={trailerUrl} 
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen></iframe>
-        </div>
-      )}
-
-      {/* 인기 영화 섹션 */}
-      {!error && (
+      {/* API 키가 있을 때만 영화 데이터를 보여줌 */}
+      {!error && apiKey && (
         <>
+          {/* 배너 섹션 */}
+          {featuredMovie && (
+            <div className="banner" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${featuredMovie.backdrop_path})` }}>
+              <div className="banner-content">
+                <h1>{featuredMovie.title}</h1>
+                <p>{featuredMovie.overview}</p>
+                <div className="banner-buttons">
+                  <button className="play-btn" onClick={handlePlayClick}>재생</button>
+                  <button className="info-btn" onClick={handleInfoClick}>상세 정보</button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 트레일러 섹션 */}
+          {trailerUrl && (
+            <div className="trailer-section">
+              <iframe width="560" height="315" src={trailerUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            </div>
+          )}
+
+          {/* 인기 영화 섹션 */}
           <div className="section-title">
             <h1>인기 영화</h1>
           </div>
@@ -267,6 +258,7 @@ const Home = ({ apiKey }) => {  // apiKey를 props로 받음
             </div>
             <button className="scroll-btn right" onClick={() => scrollRight('comedy')}>▶</button>
           </div>
+
         </>
       )}
       

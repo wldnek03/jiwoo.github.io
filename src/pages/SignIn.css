@@ -1,13 +1,12 @@
-/* 로그인 폼 컨테이너 */
 .signin {
   width: 400px;
-  margin: 0 auto;
+  margin: 80px auto; /* 헤더와 겹치지 않도록 위쪽에 여백 추가 */
   padding: 40px;
   text-align: center;
   background-color: #f9f9f9; /* 약간 밝은 배경색 */
   border-radius: 12px; /* 둥근 모서리 */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* 더 부드러운 그림자 */
-  
+
   /* 기본 상태에서의 전환 설정 */
   transition: transform 1s ease-in-out, opacity 0.6s ease-in-out; /* 회전과 페이드 효과 추가 */
   transform-style: preserve-3d; /* 입체적인 회전 효과를 유지 */
