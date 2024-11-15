@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/jiwoo/static/css/main.b7938645.css",
-    "main.js": "/jiwoo/static/js/main.61f636c8.js",
-    "index.html": "/jiwoo/index.html",
-    "main.b7938645.css.map": "/jiwoo/static/css/main.b7938645.css.map",
-    "main.61f636c8.js.map": "/jiwoo/static/js/main.61f636c8.js.map"
+    "main.css": "/jiwoo.github.io/static/css/main.755058ba.css",
+    "main.js": "/jiwoo.github.io/static/js/main.d3dd9077.js",
+    "index.html": "/jiwoo.github.io/index.html",
+    "main.755058ba.css.map": "/jiwoo.github.io/static/css/main.755058ba.css.map",
+    "main.d3dd9077.js.map": "/jiwoo.github.io/static/js/main.d3dd9077.js.map"
   },
   "entrypoints": [
-    "static/css/main.b7938645.css",
-    "static/js/main.61f636c8.js"
+    "static/css/main.755058ba.css",
+    "static/js/main.d3dd9077.js"
   ]
 }
