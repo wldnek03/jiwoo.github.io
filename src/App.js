@@ -18,6 +18,7 @@ function App() {
   useEffect(() => {
     const storedApiKey = sessionStorage.getItem('apiKey');
     const storedIsLoggedIn = sessionStorage.getItem('isLoggedIn');
+    
 
     if (storedApiKey && storedIsLoggedIn === 'true') {
       setApiKey(storedApiKey);

@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Netflix Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Netflix Clone](https://path-to-your-image.png) 
 
-## Available Scripts
+## 프로젝트 개요
 
-In the project directory, you can run:
+이 프로젝트는 Netflix의 UI와 기능을 클론한 웹 애플리케이션입니다. React를 사용하여 개발되었으며, 사용자 인터페이스는 Netflix와 유사하게 구성되었습니다. 이 프로젝트는 학습 목적으로 만들어졌습니다.
 
-### `npm start`
+## 기능
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **홈 화면**: 인기 영화 및 TV 프로그램 목록 표시
+- **검색 기능**: 영화 및 TV 프로그램 검색, 포스터를 누르면 상세정보 확인 가능
+- **상세 페이지**: 각 영화 및 TV 프로그램에 대한 세부 정보 제공
+- **반응형 디자인**: 다양한 디바이스에서 최적화된 UI 제공
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 데모
 
-### `npm test`
+Demo [http://localhost:3000](http://localhost:3000)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 기술 스택
 
-### `npm run build`
+- **프론트엔드**: React, JavaScript, HTML5, CSS3
+- **상태 관리**: React Hooks (useState, useEffect)
+- **스타일링**: Styled-components / CSS 모듈
+- **API**: [TMDB API](https://www.themoviedb.org/documentation/api) (영화 데이터 제공)
+- **배포**: GitHub Pages / Vercel / Netlify (선택)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 설치 방법
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+로컬 환경에서 이 프로젝트를 실행하려면 다음 단계를 따르세요:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. 리포지토리를 클론합니다:
+   ```bash
+   git clone https://github.com/your-username/netflix-clone.git
 
-### `npm run eject`
+2. 프로젝트 디렉토리로 이동합니다
+   ```bash
+   cd <파일 이름>
+ 
+ 3. 필요한 패키지를 설치합니다
+   ```bash
+   npm install 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 4. 애플리케이션을 실행합니다
+    ```bash
+   npm start
