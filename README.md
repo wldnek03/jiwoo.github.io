@@ -37,10 +37,10 @@ Demo [http://localhost:3000](http://localhost:3000)
    ```bash
    cd <파일 이름>
  
- 3. 필요한 패키지를 설치합니다
+3. 필요한 패키지를 설치합니다
    ```bash
    npm install 
 
- 4. 애플리케이션을 실행합니다
+4. 애플리케이션을 실행합니다
     ```bash
    npm start
