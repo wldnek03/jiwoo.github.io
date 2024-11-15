@@ -93,6 +93,23 @@ h1 {
   margin: auto;
   padding: 10px;
 }
+.recent-searches {
+  margin-top: 10px;
+}
+
+.recent-searches ul {
+  list-style-type: none;
+}
+
+.recent-searches li {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.recent-searches li:hover {
+  text-decoration: underline;
+}
 
 /* 반응형 디자인 */
 
