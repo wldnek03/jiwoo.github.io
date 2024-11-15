@@ -42,7 +42,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build  # 배포할 정적 파일들이 위치한 경로 (예시로 'public' 폴더)
+          path: |
+            ./build  
+            ./src
+            ./static
 
   # Deploy website to GitHub Pages hosting
   deploy:
