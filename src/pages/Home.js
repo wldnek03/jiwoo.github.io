@@ -18,10 +18,6 @@ const Home = ({ apiKey }) => {
 
   // 영화 데이터를 가져오는 함수들
   useEffect(() => {
-    if (!apiKey) {
-      setError("로그인 후 영화를 볼 수 있습니다."); // API 키가 없을 때 에러 메시지 설정
-      return;
-    }
 
     const getPopularMovies = async () => {
       try {
