@@ -47,8 +47,8 @@ const Header = ({ onLogout }) => {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/">🎬 Joo 영화</Link>
-      </div>
+  <Link to="/" style={{ fontWeight: 'bold' }}>🎬 Joo 영화</Link>
+</div>
       
       <nav className="nav-links">
         <Link to="/">홈</Link>

@@ -44,4 +44,6 @@
 }
 .no-scroll {
   overflow: hidden;
+  position: fixed; /* 터치 스크롤 방지 */
+  width: 100%;     /* 레이아웃 변형 방지 */
 }

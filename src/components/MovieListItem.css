@@ -55,7 +55,7 @@
 @media (max-width: 555px) {
   .wishlist-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 한 줄에 두 개씩 보이도록 설정 */
+    grid-template-columns: calc(100% / 2 );  /* 한 줄에 두 개씩 보이도록 설정 */
     justify-content: center; /* 그리드 항목들을 수평 중앙에 배치 */
     gap: 10px; /* 그리드 항목 사이에 간격 추가 */
   }
