@@ -81,3 +81,76 @@
 .back-button:hover {
     background-color: #b30000;
 }
+
+/* 반응형 스타일 - 모바일 화면 (최대 너비가 768px 이하일 때 적용) */
+@media (max-width: 768px) {
+
+   /* 영화 상세 정보 레이아웃 - 모바일에서는 세로로 배치 */
+   .movie-detail {
+       flex-direction: column; /* 가로에서 세로로 변경 */
+       max-width: none; /* 최대 너비 제한 해제 */
+       width: 100%; /* 화면 전체 너비 사용 */
+   }
+
+   .movie-poster {
+       width: 100%; /* 포스터가 화면 전체 너비를 차지하도록 설정 */
+       border-radius: 10px; /* 모든 모서리를 둥글게 설정 */
+   }
+
+   .movie-info {
+       padding: 15px; /* 패딩을 조금 줄임 */
+   }
+
+   .movie-title {
+       font-size: clamp(1.5rem, 5vw, 2rem); /* 글씨 크기를 반응형으로 설정 (최소값과 최대값 설정) */
+   }
+
+   .movie-release-date,
+   .movie-rating {
+       font-size: clamp(1rem, 4vw, 1.2rem); /* 글씨 크기를 반응형으로 설정 */
+   }
+
+   .movie-overview {
+       margin-top: 15px; /* 여백을 조금 줄임 */
+       font-size: clamp(0.9rem, 3vw, 1.1rem); /* 글씨 크기를 반응형으로 설정 */
+   }
+
+   .trailer-container h2 {
+       font-size: clamp(1.2rem, 4vw, 1.5rem); /* 제목 크기를 반응형으로 설정 */
+   }
+
+   .back-button {
+       padding: 8px 16px; /* 버튼 패딩을 줄여서 모바일에 맞춤 */
+       font-size: clamp(0.9rem, 3vw, 1.1rem); /* 버튼 글씨 크기를 반응형으로 설정 */
+   }
+}
+
+/* 반응형 스타일 - 작은 모바일 화면 (최대 너비가 480px 이하일 때 적용) */
+@media (max-width: 480px) {
+
+   .movie-detail-container {
+       padding-left: 20px; 
+       padding-right: 20px; 
+       padding-top: 80px; /* 헤더 공간을 조금 줄임 */
+   }
+
+   .movie-info {
+       padding-left: 10px; 
+       padding-right: 10px; 
+       padding-bottom: 15px; 
+   }
+
+   .movie-title {
+       font-size: clamp(1.3rem, 5vw, 1.8rem); /* 더 작은 화면에서 제목 크기를 줄임 */
+   }
+
+   .movie-release-date,
+   .movie-rating {
+       font-size: clamp(0.9rem,4vw,1rem); /* 더 작은 화면에서 글씨 크기를 줄임 */
+   }
+
+   .movie-overview {
+       margin-top:10px; 
+       font-size :clamp(0.8rem ,3vw ,1rem);/* 더 작은화면에서 개요 글씨크기 조정*/
+   }
+}
