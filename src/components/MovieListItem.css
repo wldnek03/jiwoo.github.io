@@ -49,7 +49,7 @@
     grid-template-columns: repeat(4, 1fr);
     /* 이미지 크기 조정 */
     .movie-list-item {
-      width: calc(100% / 4 - 20px); /* 포스터 너비를 그리드에 맞게 동적으로 조정 */
+      width: calc(100% / 4 ); /* 포스터 너비를 그리드에 맞게 동적으로 조정 */
     }
   }
 }
@@ -58,7 +58,7 @@
   .wishlist-container {
     grid-template-columns: repeat(3, 1fr);
     .movie-list-item {
-      width: calc(100% / 3 - 20px);
+      width: calc(100% / 3 );
     }
   }
 }
@@ -67,7 +67,7 @@
   .wishlist-container {
     grid-template-columns: repeat(2, 1fr);
     .movie-list-item {
-      width: calc(100% / 2 - 20px);
+      width: calc(100% / 2 );
     }
   }
 }
