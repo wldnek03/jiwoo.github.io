@@ -56,4 +56,10 @@
    .wishlist-container {
      grid-template-columns: repeat(2, 1fr); /* 한 줄에 세 개씩 보이도록 설정 */
    }
+
+   .movie-list-item {
+     width: calc(100% /2); /* 너비를 적절히 조정하여 세 개가 들어가도록 설정 */
+     height: auto; /* 높이는 자동으로 조정하여 비율 유지 */
+     margin: -1px -5px;
+   }
 }
