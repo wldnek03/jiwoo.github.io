@@ -96,9 +96,9 @@ const SignIn = ({ onLoginSuccess }) => {
         onChange={(e) => setApiKey(e.target.value)} 
       />
 
-      <div className="checkbox-container">
-        <input type="checkbox" id="rememberMe" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
-        <label htmlFor="rememberMe">아이디 기억하기</label>
+       <div className="checkbox-container" style={{ display: 'flex', alignItems: 'center' }}>
+          <input type="checkbox" id="rememberMe" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
+          <label htmlFor="rememberMe" style={{ marginLeft: '5px' }}>아이디 기억하기</label>
       </div>
 
       <button onClick={handleLogin}>

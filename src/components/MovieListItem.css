@@ -47,7 +47,7 @@
 /* 화면 너비가 최대 768px일 때 한 줄에 최대 2개 */
 @media (max-width: 768px) {
   .movie-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px; /* 작은 화면에서는 간격을 조금 줄임 */
     padding: 10px;
   }
@@ -56,7 +56,7 @@
 /* 화면 너비가 최대 555px일 때 한 줄에 최대 하나씩 표시 */
 @media (max-width: 555px) {
    .movie-list {
-     grid-template-columns: repeat(1, minmax(150px, auto));
+     grid-template-columns: repeat(2, minmax(150px, auto));
      gap: 10px;
    }
 
