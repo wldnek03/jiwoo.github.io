@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // useNavigate로 변경
-import './MovieDetail.css'; // CSS 파일 추가
+import { useParams, useNavigate } from 'react-router-dom';
+import './MovieDetail.css';
 import Header from '../components/Header';
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 const YOUTUBE_BASE_URL = "https://www.youtube.com/embed/";
 
-// 로컬 스토리지에서 사용자 입력 API 키 가져오기
-const getApiKey = () => {
-  const apiKey = localStorage.getItem('sessionId');
+// 세션 스토리지에서 API 키 가져오기
+const getApiKeyFromSession = () => {
+  const apiKey = sessionStorage.getItem('apiKey'); // 세션 스토리지에서 'apiKey' 가져옴
   if (!apiKey) {
     throw new Error("API Key is missing. Please log in.");
   }
@@ -25,16 +25,17 @@ const MovieDetail = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
+        const apiKey = getApiKeyFromSession(); // 세션에서 API 키 가져오기
+
         // 영화 상세 정보 요청
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${getApiKey()}&language=ko-KR`);
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=ko-KR`);
         const data = await response.json();
         setMovie(data);
 
         // 영화 트레일러 정보 요청 (콘솔에 URL 출력)
-        const videoResponse = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${getApiKey()}`);
-        console.log("Fetching video data from:", `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${getApiKey()}&language=ko-KR`);
+        const videoResponse = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`);
+        console.log("Fetching video data from:", `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&language=ko-KR`);
         const videoData = await videoResponse.json();
-        console.log("Video data:", videoData); // 응답 데이터 확인
         
         // 트레일러가 있으면 첫 번째 트레일러의 key 저장 (YouTube 동영상 key)
         const trailer = videoData.results.find(video => video.type === "Trailer" && video.site === "YouTube");
