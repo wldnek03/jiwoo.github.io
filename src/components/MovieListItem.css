@@ -47,23 +47,27 @@
 @media (max-width: 1200px) {
   .wishlist-container {
     grid-template-columns: repeat(4, 1fr); /* 화면 너비가 1200px 이하일 때 한 줄에 4개 */
+    justify-content: center; 
   }
 }
 
 @media (max-width: 992px) {
   .wishlist-container {
     grid-template-columns: repeat(3, 1fr); /* 화면 너비가 992px 이하일 때 한 줄에 3개 */
+    justify-content: center; 
   }
 }
 
 @media (max-width: 768px) {
   .wishlist-container {
     grid-template-columns: repeat(2, 1fr); /* 화면 너비가 768px 이하일 때 한 줄에 2개 */
+    justify-content: center; 
   }
 }
 
 @media (max-width: 400px) {
   .wishlist-container {
     grid-template-columns: repeat(1, 1fr); /* 화면 너비가 576px 이하일 때 한 줄에 1개 */
+    justify-content: center; 
   }
 }
