@@ -123,7 +123,7 @@ h1 {
 /* 중간 화면 (태블릿) - 한 줄에 두 개의 영화 */
 @media (min-width: 601px) and (max-width: 1024px) {
     .movie-item {
-        width: calc(24% - 20 px); 
+        width: calc(24% - 20px); 
     }
 }
 
