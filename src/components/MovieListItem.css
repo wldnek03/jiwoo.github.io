@@ -51,15 +51,18 @@
   }
 }
 
-/* 화면 너비가 최대 992px일 때 한 줄에 3개 */
+/* 화면 너비가 최대 555px일 때 한 줄에 2개 */
 @media (max-width: 555px) {
-   .wishlist-container {
-     grid-template-columns: repeat(2, 1fr); /* 한 줄에 세 개씩 보이도록 설정 */
-   }
+  .wishlist-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 한 줄에 두 개씩 보이도록 설정 */
+    justify-content: center; /* 그리드 항목들을 수평 중앙에 배치 */
+    gap: 10px; /* 그리드 항목 사이에 간격 추가 */
+  }
 
-   .movie-list-item {
-     width: calc(100% /2); /* 너비를 적절히 조정하여 세 개가 들어가도록 설정 */
-     height: auto; /* 높이는 자동으로 조정하여 비율 유지 */
-     margin: -1px -5px;
-   }
+  .movie-list-item {
+    width: calc(100% / 2 - 10px); /* 너비를 적절히 조정하여 두 개가 들어가도록 설정 */
+    height: auto; /* 높이는 자동으로 조정하여 비율 유지 */
+    margin: 0 auto; /* 각 포스터를 가운데 정렬 */
+  }
 }
