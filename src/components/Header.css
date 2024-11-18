@@ -1,6 +1,5 @@
 /* 전체 페이지에서 가로 스크롤 방지 및 배경색 설정 */
 html, body {
-  background-color: #141414; /* 배경색을 전체 페이지에 적용 */
   overflow-x: hidden; /* 가로 스크롤 방지 */
 }
 
@@ -120,23 +119,23 @@ img, .poster-container img {
 /* 작은 화면 (모바일) - 헤더 레이아웃 조정 및 텍스트 크기 축소 */
 @media (max-width: 600px) {
     .header {
-        padding: 10px; /* 패딩을 더 줄여서 공간 확보 */
+        padding: 25px; /* 패딩을 더 줄여서 공간 확보 */
     }
 
     .nav-links {
-        margin-left: 6px;
-        gap: 6px; /* 링크 간격 축소 */
+        margin-left: 5px;
+        gap: 5px; /* 링크 간격 축소 */
     }
 
     .auth-button,
     .header a {
       
-       font-size: clamp(14px, 2vw, 16px);  /* 텍스트 크기를 더 작게 설정 */
+       font-size: clamp(12px, 2vw, 15px);  /* 텍스트 크기를 더 작게 설정 */
         margin-left: auto; /* 모바일에서도 버튼과 텍스트 간격 자동 조정 */
     }
 
     .username {
-        font-size: clamp(14px,2vw ,16px); 
+      font-size: clamp(12px, 2vw, 15px); 
         max-width :calc(100% - 70px ); 
     }
     

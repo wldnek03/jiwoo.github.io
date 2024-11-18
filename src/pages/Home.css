@@ -63,9 +63,10 @@
     text-align: left; /* 텍스트를 왼쪽 정렬 */
     font-size: 2rem;
   }
-  .banner {
+/* 배너 스타일 */
+.banner {
     position: relative;
-    height: 60vh; /* 배너 높이 설정 */
+    height: 60vh; /* 기본 배너 높이 설정 */
     background-size: cover; /* 배경 이미지가 꽉 차도록 설정 */
     background-position: center; /* 배경 이미지를 가운데로 정렬 */
     color: white; /* 텍스트 색상 하얀색으로 설정 */
@@ -89,7 +90,6 @@
     font-size: 0.9rem; /* 설명 텍스트 크기 설정 */
     line-height: 1.5;
     margin-bottom: 20px;
-    
 }
 
 /* 배너 버튼 스타일 */
@@ -113,4 +113,56 @@
 .info-btn {
     background-color: rgba(109,109,110,0.7); /* 반투명 회색 버튼 */
     color: white;
+}
+
+/* 반응형 디자인 - 작은 화면 (모바일)에서 배너 크기 조정 */
+@media (max-width: 768px) {
+    .banner {
+        height: 40vh; /* 모바일에서는 배너 높이를 줄임 */
+        padding: 20px; /* 패딩을 줄여서 화면에 맞춤 */
+        background-position: top; /* 배경 이미지를 상단에 맞춤 */
+    }
+
+    .banner h1 {
+        font-size: 1.8rem; /* 제목 크기를 줄임 */
+        margin-bottom: 15px;
+    }
+
+    .banner p {
+        font-size: 0.8rem; /* 설명 텍스트 크기를 줄임 */
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+
+    .banner-buttons button {
+        padding: 8px 16px; /* 버튼 크기를 줄여서 모바일에 맞춤 */
+        font-size: 0.9rem; /* 버튼 텍스트 크기 조정 */
+        margin-right: 8px; 
+    }
+}
+
+/* 반응형 디자인 - 아주 작은 화면 (모바일)에서 더 작게 조정 */
+@media (max-width: 576px) {
+    .banner {
+        height: 35vh; /* 더 작은 화면에서는 배너 높이를 더 줄임 */
+        padding: 15px;
+        background-position: top center;
+    }
+
+    .banner h1 {
+        font-size: 1.5rem; /* 제목 크기를 더 줄임 */
+        margin-bottom: 10px;
+    }
+
+    .banner p {
+        font-size: 0.75rem; /* 설명 텍스트 크기를 더 줄임 */
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+
+    .banner-buttons button {
+        padding: 6px 12px; /* 버튼 크기를 더 줄임 */
+        font-size: 0.8rem; 
+        margin-right: 6px;
+    }
 }
