@@ -44,7 +44,7 @@
   }
 }
 
-/* 화면 너비가 최대 768px일 때 한 줄에 최대 2개 */
+/* 화면 너비가 최대 768px일 때 한 줄에 최대 3개 */
 @media (max-width: 768px) {
   .movie-list {
     grid-template-columns: repeat(3, 1fr);
@@ -53,11 +53,11 @@
   }
 }
 
-/* 화면 너비가 최대 555px일 때 한 줄에 최대 하나씩 표시 */
+/* 화면 너비가 최대 555px일 때 한 줄에 최대 두 개씩 표시 */
 @media (max-width: 555px) {
    .movie-list {
-     grid-template-columns: repeat(2, minmax(150px, auto));
-     gap: 10px;
+     grid-template-columns: repeat(2, minmax(150px, auto)); /* 한 줄에 두 개씩 표시되도록 설정 */
+     gap: 10px; /* 간격을 조금 줄임 */
    }
 
    .movie-list-item {
