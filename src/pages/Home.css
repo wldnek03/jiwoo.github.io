@@ -66,7 +66,7 @@
 /* 배너 스타일 */
 .banner {
     position: relative;
-    height: 60vh; /* 기본 배너 높이 설정 */
+    height: 75vh; /* 기본 배너 높이 설정 */
     background-size: cover; /* 배경 이미지가 꽉 차도록 설정 */
     background-position: center; /* 배경 이미지를 가운데로 정렬 */
     color: white; /* 텍스트 색상 하얀색으로 설정 */
@@ -118,7 +118,7 @@
 /* 반응형 디자인 - 작은 화면 (모바일)에서 배너 크기 조정 */
 @media (max-width: 768px) {
     .banner {
-        height: 40vh; /* 모바일에서는 배너 높이를 줄임 */
+        height: 50vh; /* 모바일에서는 배너 높이를 줄임 */
         padding: 20px; /* 패딩을 줄여서 화면에 맞춤 */
         background-position: top; /* 배경 이미지를 상단에 맞춤 */
     }
@@ -144,7 +144,7 @@
 /* 반응형 디자인 - 아주 작은 화면 (모바일)에서 더 작게 조정 */
 @media (max-width: 576px) {
     .banner {
-        height: 35vh; /* 더 작은 화면에서는 배너 높이를 더 줄임 */
+        height: 45vh; /* 더 작은 화면에서는 배너 높이를 더 줄임 */
         padding: 15px;
         background-position: top center;
     }

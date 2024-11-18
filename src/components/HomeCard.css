@@ -1,10 +1,11 @@
-/* HomeCard 스타일 */
-.home-card-item{
+/* 기본 스타일 (데스크탑) */
+.home-card-item {
   position: relative;
   flex: 0 0 calc(20% - 10px); /* 한 줄에 다섯 개씩 보이도록 설정 */
   margin-right: 10px;
   overflow: hidden; /* 부모 요소에서 넘치는 부분 숨김 */
   background-color: #141414;
+  transition: transform 0.3s ease; /* 마우스 오버 시 부드러운 확대 효과 */
 }
 
 /* 포스터 이미지 스타일 */
@@ -18,6 +19,7 @@
   transform: scale(1.05); /* 마우스를 올렸을 때 확대 */
   cursor: pointer; /* 커서를 손 모양으로 변경 */
 }
+
 /* 좋아요 아이콘 (❤️) */
 .like-icon {
   position: absolute;
@@ -32,7 +34,41 @@
   margin-top: 5px;
   text-align: center;
   color: white;
-  font-size: clamp(0.85rem, 2vw, 1.5rem);
+  font-size: clamp(0.85rem, 2vw, 1.5rem); /* 반응형 텍스트 크기 */
 }
 
+/* 반응형 스타일 - 태블릿 및 작은 화면 (최대 너비: 1024px) */
+@media (max-width: 1024px) {
+  
+  .home-card-item {
+    flex: 0 0 calc(25% - 10px); /* 한 줄에 네 개씩 보이도록 설정 */
+    margin-right: 10px;
+    margin-bottom: 15px; /* 카드 간의 간격 추가 */
+    background-color: #141414;
+    transition: transform 0.3s ease; /* 부드러운 확대 효과 유지 */
+  }
 
+}
+
+/* 반응형 스타일 - 모바일 (최대 너비: 600px) */
+@media (max-width: 600px) {
+
+   .home-card-item {
+     flex: 0 0 calc(33.33% - 10px); /* 한 줄에 세 개씩 보이도록 설정 */
+     margin-right: 10px;
+     margin-bottom: 15px; /* 카드 간의 간격 추가 */
+     background-color: #141414;
+   }
+
+   .poster-container img {
+     height: auto; /* 모바일에서는 높이를 자동으로 조정하여 비율 유지 */
+   }
+
+   .like-icon {
+     font-size: 20px; /* 좋아요 아이콘 크기 축소 */
+   }
+
+   .movie-title-item {
+     font-size: clamp(0.75rem, 2vw, 1.25rem); /* 텍스트 크기를 조금 더 작게 조정 */
+   }
+}
