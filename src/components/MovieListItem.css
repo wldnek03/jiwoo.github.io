@@ -1,10 +1,12 @@
 /* 영화 리스트 아이템 스타일 */
 .movie-list-item {
   position: relative;
-  width: 100%; /* 부모 요소의 너비에 맞게 조정 */
-  height: 350px; /* 포스터와 제목을 포함한 고정 높이 */
+  width: 200px; /* 모든 포스터의 너비를 고정 */
+  height: 350px; /* 포스터와 제목을 포함한 높이 */
   margin: 10px; /* 포스터 간격 추가 */
-  border-radius: 5px; /* 모서리를 둥글게 */
+  background-color: #333; /* 영화 아이템의 배경색 */
+  border-radius: 5px;  /* 모서리를 둥글게 */
+  overflow: hidden; /* 이미지가 넘칠 경우 숨김 처리 */
   transition: transform 0.3s ease; /* 부드러운 전환 효과 */
 }
 
@@ -16,7 +18,7 @@
 /* 포스터 이미지 스타일 */
 .movie-list-item img {
   width: 100%; /* 부모 요소의 너비에 맞게 이미지 크기 조정 */
-  height: 100%; /* 부모 요소의 높이에 맞게 이미지 크기 조정 */
+  height: 85%; /* 부모 요소의 높이에 맞게 이미지 크기 조정 (85%로 설정) */
   object-fit: cover; /* 이미지 비율을 유지하면서 부모 크기에 맞게 자름 */
 }
 
@@ -30,38 +32,32 @@
 
 /* 영화 목록 그리드 배치 스타일 */
 .movie-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wishlist-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 자동으로 열 개수 조정 */
+  grid-template-columns: repeat(5, 1fr); /* 기본값: 한 줄에 5개 */
   gap: 20px; /* 아이템 사이의 간격 */
+  padding: 20px;
 }
 
-/* 반응형 그리드 - 화면 너비에 따른 열 개수 조정 */
-
-/* 화면 너비가 최대 1200px일 때 한 줄에 최대 4개 */
 @media (max-width: 1200px) {
-  .movie-list {
-    grid-template-columns: repeat(4, 1fr);
+  .wishlist-container {
+    grid-template-columns: repeat(4, 1fr); /* 화면 너비가 1200px 이하일 때 한 줄에 4개 */
   }
 }
 
-/* 화면 너비가 최대 768px일 때 한 줄에 최대 3개 */
+@media (max-width: 992px) {
+  .wishlist-container {
+    grid-template-columns: repeat(3, 1fr); /* 화면 너비가 992px 이하일 때 한 줄에 3개 */
+  }
+}
+
 @media (max-width: 768px) {
-  .movie-list {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px; /* 작은 화면에서는 간격을 조금 줄임 */
-    padding: 10px;
+  .wishlist-container {
+    grid-template-columns: repeat(2, 1fr); /* 화면 너비가 768px 이하일 때 한 줄에 2개 */
   }
-}
-
-/* 화면 너비가 최대 555px일 때 한 줄에 최대 두 개씩 표시 */
-@media (max-width: 555px) {
-   .movie-list {
-     grid-template-columns: repeat(2, minmax(150px, auto)); /* 한 줄에 두 개씩 표시되도록 설정 */
-     gap: 10px; /* 간격을 조금 줄임 */
-   }
-
-   .movie-list-item {
-     height: auto; /* 높이를 자동으로 조정하여 비율 유지 */
-     margin-bottom: 15px;
-   }
 }
