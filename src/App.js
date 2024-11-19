@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './view/Home';
 import PopularList from './components/PopularList';
-import SearchMovies from './pages/SearchMovies';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import Wishlist from './pages/Wishlist';
+import SearchMovies from './view/SearchMovies';
+import SignIn from './view/SignIn';
+import SignUp from './view/SignUp';
+import Wishlist from './view/Wishlist';
 import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
-import MovieDetail from './pages/MovieDetail';
+import MovieDetail from './view/MovieDetail';
 import Header from './components/Header'; // Header 컴포넌트 임포트
 
 function App() {

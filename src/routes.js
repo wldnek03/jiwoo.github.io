@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import SignIn from './pages/SignIn';
-import Wishlist from './pages/Wishlist';
+import Home from './view/Home';
+import SignIn from './view/SignIn';
+import Wishlist from './view/Wishlist';
 import PopularList from './components/PopularList';
-import SearchMovies from './pages/SearchMovies';
-import MovieList from './pages/MovieList';
-import MovieDetail from './pages/MovieDetail';
+import SearchMovies from './view/SearchMovies';
+import MovieList from './view/MovieList';
+import MovieDetail from './view/MovieDetail';
 
 const AppRoutes = () => (
   <Router>

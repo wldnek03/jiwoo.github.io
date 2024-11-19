@@ -15,7 +15,7 @@
 
 ## 데모
 
-Demo [http://localhost:3000](http://localhost:3000)
+Demo [https://easycow.netlify.app/](https://easycow.netlify.app/)
 
 ## 기술 스택
 
