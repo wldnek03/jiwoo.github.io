@@ -1,10 +1,11 @@
 # Netflix Clone
 
-![Netflix Clone](https://path-to-your-image.png) 
+![Netflix Clone](/Users/jiwoo/Desktop/jiwoo.github.io/image.png) 
 
 ## 프로젝트 개요
 
-이 프로젝트는 Netflix의 UI와 기능을 클론한 웹 애플리케이션입니다. React를 사용하여 개발되었으며, 사용자 인터페이스는 Netflix와 유사하게 구성되었습니다. 이 프로젝트는 학습 목적으로 만들어졌습니다.
+이 프로젝트는 Netflix의 UI와 기능을 클론한 웹 애플리케이션입니다. React를 사용하여 개발되었으며, 사용자 인터페이스는 Netflix와 유사하게 구성되었습니다. 
+이 프로젝트는 학습 목적으로 만들어졌습니다. 그리고 배포는 netlify를 사용하여 배포하였습니다.
 
 ## 기능
 
