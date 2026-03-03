@@ -28,7 +28,7 @@
 
 ## 홈페이지
 
-Joo Movie [https://easycow.netlify.app/](https://easycow.netlify.app/)
+Joo Movie [https://easycow.netlify.app/]((https://joomovie.netlify.app/))
 
 ## 기술 스택
 
